@@ -1,9 +1,9 @@
 //npm run devStart
 
 require('dotenv').config();
-//var dice = require('./dice.js');
+var dice = require('./dice.js');
 
-
+//console.log(JSON.stringify(dice.yellowDice(20)));
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
