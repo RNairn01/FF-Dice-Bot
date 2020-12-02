@@ -7,7 +7,7 @@ const client = new Discord.Client();
 
 var dice = require('./dice.js');
 const COMMAND = '!';
-const prefix = '!roll';
+const rollPrefix = 'roll';
 
 let numRegex = /\d/;
 
@@ -17,14 +17,27 @@ client.on('ready', () => {
 
 client.on('message', msg => {
    
-   if (!msg.content.startsWith(prefix) || msg.author.bot) return;
-   const args = msg.content.slice(prefix.length).trim().split(' ');
-   const command = args.shift().toLowerCase();
-   msg.reply(dice.determineSuccess(command[0], command[1], command[2], command[3], command[4], command[5]))
+   if (msg.content.startsWith(COMMAND + rollPrefix) && !msg.author.bot) {
+   const args = msg.content.slice(rollPrefix.length + COMMAND.length).trim().split(/ +/);
 
-  /*  if (msg.content === 'ping') {
-        msg.reply(dice.determineSuccess(2, 3, 8, 5, 1, 0));
-    }*/
+   let yInput = 0;
+   let gInput = 0;
+   let rInput = 0;
+   let pInput = 0;
+   let bInput = 0;
+   let sInput = 0;
+
+   args.forEach(e => {
+       if (e[1] == 'y') yInput = e[0];
+       if (e[1] == 'g') gInput = e[0];
+       if (e[1] == 'r') rInput = e[0];
+       if (e[1] == 'p') pInput = e[0];
+       if (e[1] == 'b') bInput = e[0];
+       if (e[1] == 's') sInput = e[0];
+   });
+
+   msg.reply(dice.determineSuccess(yInput, gInput, rInput, pInput, bInput, sInput));
+ };
 });
 
 client.login(process.env.BOT_TOKEN)
