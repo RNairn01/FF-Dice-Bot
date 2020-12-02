@@ -12,7 +12,7 @@ function randomInt(min, max) { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-function determineSuccess(yellow, green, red, purple, advantage, threat) {
+module.exports.determineSuccess = function(yellow, green, red, purple, advantage, threat) {
     let successCounter = 0;
     let failCounter = 0;
     let advantageCounter = 0;
@@ -74,7 +74,7 @@ function determineSuccess(yellow, green, red, purple, advantage, threat) {
     if (despairState) {
         output += ' and DESPAIR';
     };
-    return output;
+    return `${output}! You got ${successCounter} success/es, ${failCounter} failure/s, ${advantageCounter} advantage and ${threatCounter} threat.`;
   };
 
 function yellowDice(num) {
