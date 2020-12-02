@@ -8,14 +8,17 @@ const client = new Discord.Client();
 var dice = require('./dice.js');
 const COMMAND = '!';
 const rollPrefix = 'roll';
-
-let numRegex = /\d/;
+const helpPrefix = 'help';
 
 client.on('ready', () => {
     console.log('Logged in!');
 });
 
 client.on('message', msg => {
+
+   if (msg.content === `${COMMAND}${helpPrefix}`) {
+    msg.reply('This is where the help will go when I actually write it.'); 
+   }
    
    if (msg.content.startsWith(COMMAND + rollPrefix) && !msg.author.bot) {
    const args = msg.content.slice(rollPrefix.length + COMMAND.length).trim().split(/ +/);
