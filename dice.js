@@ -1,18 +1,81 @@
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
+
 const blank = 'blank';
 const triumph = 'triumph';
 const succ = 'success';
+const despair = 'despair';
 const fail = 'failure';
-const threat = 'threat';
-const adv = 'boost';
-const dis = 'setback';
+const adv = 'advantage';
+const dis = 'threat';
 
 function randomInt(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-function determineSuccess(yellow, green, purple, red, adv, dis) {
+function determineSuccess(yellow, green, red, purple, advantage, threat) {
+    let successCounter = 0;
+    let failCounter = 0;
+    let advantageCounter = 0;
+    let threatCounter = 0;
+    let triumphState = false;
+    let despairState = false;
+    let output = '';
 
-  }
+    function readResults(diceArr) {
+        diceArr.forEach(e => {
+            switch(e) {
+                case blank:
+                    break;
+                case triumph:
+                    triumphState = true;
+                    successCounter++;
+                    break;
+                case succ:
+                    successCounter++;
+                    break;
+                case despair:
+                    despairState = true;
+                    failCounter++;
+                    break;
+                case fail:
+                    failCounter++;
+                    break;
+                case adv:
+                    advantageCounter++;
+                    break;
+                case dis:
+                    threatCounter++;
+                    break;
+            };
+        });
+    };
+
+    readResults(yellowDice(yellow));
+    readResults(greenDice(green));
+    readResults(redDice(red));
+    readResults(purpleDice(purple));
+    readResults(advDice(advantage));
+    readResults(disDice(threat));
+
+    if (successCounter > failCounter) {
+        output += 'SUCCESS - ';
+    } else output += 'FAILURE - ';
+
+    if (advantageCounter > threatCounter) {
+        output += 'with ADVANTAGE';
+    } else if (advantageCounter < threatCounter) {
+        output += 'with THREAT';
+    } else output += 'NEUTRAL';
+
+    if (triumphState) {
+        output += ' and TRIUMPH';
+    }; 
+    
+    if (despairState) {
+        output += ' and DESPAIR';
+    };
+    return output;
+  };
 
 function yellowDice(num) {
  let diceArr = [];
@@ -99,7 +162,7 @@ function redDice(num) {
                    diceArr.push(dis, adv);
                    break;
                case 11:
-                   diceArr.push(threat);
+                   diceArr.push(despair);
                    break;                                                                                  
            };
        };
@@ -229,3 +292,5 @@ function disDice(num) {
         };
         return diceArr;    
 };
+
+//TODO: Implement Force Dice
