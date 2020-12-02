@@ -50,6 +50,17 @@ module.exports.determineSuccess = function(yellow, green, red, purple, advantage
         });
     };
 
+    function correctPlural(str) {
+        if (str == succ) {
+            if (successCounter === 1) return 'success'
+            else return 'successes';
+        };
+        if (str == fail) {
+            if (failCounter === 1) return 'failure'
+            else return 'failures';
+        };
+    };
+
     readResults(yellowDice(yellow));
     readResults(greenDice(green));
     readResults(redDice(red));
@@ -74,7 +85,7 @@ module.exports.determineSuccess = function(yellow, green, red, purple, advantage
     if (despairState) {
         output += ' and DESPAIR';
     };
-    return `${output}! You got ${successCounter} success/es, ${failCounter} failure/s, ${advantageCounter} advantage and ${threatCounter} threat.`;
+    return `${output}! You got ${successCounter} ${correctPlural(succ)}, ${failCounter} ${correctPlural(fail)}, ${advantageCounter} advantage and ${threatCounter} threat.`;
   };
 
 function yellowDice(num) {
