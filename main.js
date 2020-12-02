@@ -1,7 +1,7 @@
 //npm run devStart
 
 require('dotenv').config();
-
+//var dice = require('./dice.js');
 
 
 const Discord = require('discord.js');
