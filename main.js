@@ -18,13 +18,18 @@ client.on('ready', () => {
 client.on('message', msg => {
 
    if (msg.content === `${COMMAND}${helpPrefix}` && !msg.author.bot) {
-    msg.reply('\n**COMMANDS:** \n\n' + '**!help** - display this help info.\n\n' + '**!roll** - roll the specified number of a certain dice type. Can roll multiple dice from one command by seperating inputs with spaces.\n ' + 
+    msg.reply('\n**COMMANDS:** \n\n' + '**!help** - display this help info.\n\n' + '**!roll** or **!r** - roll the specified number of a certain dice type. Can roll multiple dice from one command by seperating inputs with spaces.\n ' + 
     'e.g. "!roll 4g 3p" will roll 4 green ability dice and 3 purple difficulty dice.\n\n' + 
-    '**Dice Types:** \ny - yellow proficiency die \ng - green ability die \nr - red challenge die \np - purple difficulty die \nb - boost die \ns - setback die \nf - force die(SW Only)'); 
+    '**Dice Types:** \ny - yellow proficiency die \ng - green ability die \nr - red challenge die \np - purple difficulty die \nb - boost die \ns - setback die \nf - force die (SW Only)'); 
    }
    
    if (msg.content.startsWith(COMMAND + rollPrefix) || msg.content.startsWith(COMMAND + shortRollPrefix) && !msg.author.bot) {
-   const args = msg.content.slice(rollPrefix.length + COMMAND.length).trim().split(/ +/);
+    let args;
+    if (msg.content.startsWith(COMMAND + rollPrefix)) {
+      args = msg.content.slice(rollPrefix.length + COMMAND.length).trim().split(/ +/);
+    } else if (msg.content.startsWith(COMMAND + shortRollPrefix)) {
+      args = msg.content.slice(shortRollPrefix.length + COMMAND.length).trim().split(/ +/);  
+    };
 
    let yInput = 0;
    let gInput = 0;
