@@ -55,9 +55,7 @@ client.on('message', msg => {
     msg.reply(dice.determineSuccess(yInput, gInput, rInput, pInput, bInput, sInput));
   };
 
-   if(fInput > 0) msg.reply('TODO: Implement force die output');
-
-
+   if(fInput > 0) msg.reply(dice.forceOutput(fInput));
  };
 });
 

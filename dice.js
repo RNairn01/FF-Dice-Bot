@@ -88,6 +88,37 @@ module.exports.determineSuccess = function(yellow, green, red, purple, advantage
     return `${output}! You got ${successCounter} ${correctPlural(succ)}, ${failCounter} ${correctPlural(fail)}, ${advantageCounter} advantage and ${threatCounter} threat.`;
   };
 
+module.exports.forceOutput = function(force) {
+   let forceValues = forceDice(force);
+   let light = forceValues[0];
+   let dark = forceValues[1];
+
+   function correctPlural(str, side) {
+       if (str == 'are' && side == 'light') {
+           if(light === 1) return 'is'
+           else return 'are';
+       };
+       if (str == 'points' && side == 'light') {
+        if(light === 1) return 'point'
+        else return 'points';
+       };
+       if (str == 'are' && side == 'dark') {
+        if(dark === 1) return 'is'
+        else return 'are';
+       };
+       if (str == 'points' && side == 'dark') {
+        if(dark === 1) return 'point'
+        else return 'points';
+       };
+       if (str == 'dice') {
+         if(force == 1) return 'die'
+         else return 'dice';
+       };               
+    };
+
+   return `From ${force} force ${correctPlural('dice', '')} there ${correctPlural('are', 'light')} ${light} light side ${correctPlural('points', 'light')} and ${dark} dark side ${correctPlural('points', 'dark')}.`
+};
+
 function yellowDice(num) {
  let diceArr = [];
     for (let i = 0; i < num; i++) {
@@ -304,4 +335,35 @@ function disDice(num) {
         return diceArr;    
 };
 
-//TODO: Implement Force Dice
+function forceDice(num) {
+    let lightValue = 0;
+    let darkValue = 0;
+
+    for (let i = 0; i < num; i++) {
+        let rand = randomInt(0,11);
+        switch(rand) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                darkValue++;
+                break;
+            case 6:
+                darkValue+= 2;
+                break;
+            case 7:
+            case 8:
+                lightValue++;
+                break;
+            case 9:
+            case 10:
+            case 11:
+                lightValue+= 2;
+                break;                                                                                  
+        };
+    };
+
+    return [lightValue, darkValue];
+};
