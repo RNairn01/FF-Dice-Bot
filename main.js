@@ -20,7 +20,7 @@ client.on('message', msg => {
 
    if (msg.content === `${COMMAND}${helpPrefix}` && !msg.author.bot) {
     msg.reply('\n**COMMANDS:** \n\n' + '**!ghelp** - display this help info.\n\n' + '**!groll** or **!gr** - roll the specified number of a certain dice type. Can roll multiple dice from one command by seperating inputs with spaces.\n ' + 
-    'e.g. "!roll 4g 3p" will roll 4 green ability dice and 3 purple difficulty dice.\n\n' +
+    'e.g. "!groll 4g 3p" will roll 4 green ability dice and 3 purple difficulty dice.\n\n' +
     '**!gm** - takes same inputs as !groll command but DMs the result to the user for secret rolls.\n\n' + 
     '**Dice Types:** \ny - yellow proficiency die \ng - green ability die \nr - red challenge die \np - purple difficulty die \nb - boost die \ns - setback die \nf - force die (SW Only)'); 
    }
