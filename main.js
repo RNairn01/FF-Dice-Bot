@@ -1,19 +1,12 @@
 //npm run devStart
 require('dotenv').config();
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Our app is running on port ${ PORT }`);
-});
-
-const Discord = require('discord.js');
-const client = new Discord.Client();
-
 var dice = require('./dice.js');
+
 const COMMAND = '!';
-const rollPrefix = 'roll';
-const shortRollPrefix = 'r';
-const helpPrefix = 'help';
+const rollPrefix = 'groll';
+const shortRollPrefix = 'gr';
+const helpPrefix = 'ghelp';
 const gmRollPrefix = 'gm';
 
 client.on('ready', () => {
@@ -23,9 +16,9 @@ client.on('ready', () => {
 client.on('message', msg => {
 
    if (msg.content === `${COMMAND}${helpPrefix}` && !msg.author.bot) {
-    msg.reply('\n**COMMANDS:** \n\n' + '**!help** - display this help info.\n\n' + '**!roll** or **!r** - roll the specified number of a certain dice type. Can roll multiple dice from one command by seperating inputs with spaces.\n ' + 
+    msg.reply('\n**COMMANDS:** \n\n' + '**!ghelp** - display this help info.\n\n' + '**!groll** or **!gr** - roll the specified number of a certain dice type. Can roll multiple dice from one command by seperating inputs with spaces.\n ' + 
     'e.g. "!roll 4g 3p" will roll 4 green ability dice and 3 purple difficulty dice.\n\n' +
-    '**!gm** - takes same inputs as !roll command but DMs the result to the user for secret rolls.\n\n' + 
+    '**!gm** - takes same inputs as !groll command but DMs the result to the user for secret rolls.\n\n' + 
     '**Dice Types:** \ny - yellow proficiency die \ng - green ability die \nr - red challenge die \np - purple difficulty die \nb - boost die \ns - setback die \nf - force die (SW Only)'); 
    }
    
