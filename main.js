@@ -1,5 +1,4 @@
 //npm run devStart
-
 require('dotenv').config();
 
 const Discord = require('discord.js');
