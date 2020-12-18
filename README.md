@@ -7,6 +7,9 @@ tabletop RPGs. I made it as a basic project to learn how to make Discord bots an
 own running of these systems. The bot is designed to provide easy check resolution without the hassle of a  
 third party web application.
 
+## Adding to server
+To add GENESYStems Administrator to a server first ensure that you have admin access to that server and then use this [link](https://discord.com/api/oauth2/authorize?client_id=783517670444105759&permissions=51200&scope=bot).
+
 ## Commands
   
 * **!ghelp** - Display all possible commands.  
